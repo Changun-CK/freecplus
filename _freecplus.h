@@ -644,7 +644,7 @@ void itoa(int n, char *s);
 /* 将字符串倒序 */
 void reverse(char *s);
 
-/* 返回最大两个字符串子串的最大长度, str3为最大长度的子串 */
+/* 返回最大两个字符串子串的最大长度, str3为最大长度的子串, 注意一定要保证str3有充足的空间 */
 int MaxChildStr(const char *str1, const char *str2, char *str3);
 
 /* 将域名转化为IP地址，通常大网站的IP都不止一个。成功返回true，失败返回false，结果集存放在容器中 */
