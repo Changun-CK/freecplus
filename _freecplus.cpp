@@ -244,7 +244,7 @@ void cUpdateStr(char *str, const char *str1, const char *str2, bool bloop)
 
 bool UpdateStr(std::string& resource_str, const std::string& sub_str, const std::string& new_str, const bool bloop)
 {
-    if ((resource_str.empty()) || (sub_str.empty()))
+    if ((resource_str.empty()) || (sub_str.empty()) || sub_str == new_str)
 	{
         return true;
 	}
