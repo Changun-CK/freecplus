@@ -1067,6 +1067,31 @@ bool MKDIR(const char *filename, bool bisfilename)
     return true;
 }
 
+std::string GetCurrentDir()
+{
+    std::string path;
+    char szDir[1024 + 1] = { 0 };
+
+    ssize_t cnt = readlink("/proc/self/exe", szDir, sizeof(szDir));
+    if(cnt < 0 || cnt >= 1025)
+    {
+        return path;
+    }
+    
+    for(ssize_t i = cnt; i >= 0; --i)
+    {
+        if(szDir[i] == '/')
+        {
+            szDir[i+1] = '\0';
+            break;
+        }
+    }
+
+    path = szDir;
+
+    return path;
+}
+
 // 打开文件。
 // FOPEN函数调用fopen库函数打开文件，如果文件名中包含的目录不存在，就创建目录。
 // FOPEN函数的参数和返回值与fopen函数完全相同。
@@ -1520,24 +1545,19 @@ bool CDir::isExist(const char *in_DirName)
     return false;
 }
 
+
 std::string CDir::getFullPath(const char *in_DirName)
 {
     std::string tmpName = in_DirName;
     if ('/' != in_DirName[0])
     {
-        char *path = nullptr;
-        path = getcwd(nullptr, 0);
-        tmpName = path;
+        // 这里取进程的路径, 不是当前路径
+        tmpName = GetCurrentDir();
         if ('/' != tmpName.back())
         {
             tmpName.append("/");
         }
         tmpName.append(in_DirName);
-
-        if (path)
-        {
-            free(path);
-        }
     }
     return tmpName;
 }

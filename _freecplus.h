@@ -235,6 +235,9 @@ public:
 // 返回值：true-成功，false-失败，如果返回失败，原因有大概有三种情况：1）权限不足；2）pathorfilename参数不是合法的文件名或目录名；3）磁盘空间不足。
 bool MKDIR(const char *pathorfilename, bool bisfilename = false);
 
+// 得到当前进程的路径
+std::string GetCurrentDir();
+
 
 // 获取某目录及其子目录中的文件列表信息。
 class CDir
