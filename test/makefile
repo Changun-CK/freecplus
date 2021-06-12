@@ -1,7 +1,7 @@
 CXX=g++
 CFLAGS=-std=c++11 -g -W -O3
 INC=-I../
-LIB=-Wl,-rpath=../ -l_freecplus
+LIB=-L../ -Wl,-rpath=../ -l_freecplus
 
 all:testcdir
 

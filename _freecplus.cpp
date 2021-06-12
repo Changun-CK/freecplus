@@ -1067,31 +1067,6 @@ bool MKDIR(const char *filename, bool bisfilename)
     return true;
 }
 
-std::string GetCurrentDir()
-{
-    std::string path;
-    char szDir[1024 + 1] = { 0 };
-
-    ssize_t cnt = readlink("/proc/self/exe", szDir, sizeof(szDir));
-    if(cnt < 0 || cnt >= 1025)
-    {
-        return path;
-    }
-    
-    for(ssize_t i = cnt; i >= 0; --i)
-    {
-        if(szDir[i] == '/')
-        {
-            szDir[i+1] = '\0';
-            break;
-        }
-    }
-
-    path = szDir;
-
-    return path;
-}
-
 // 打开文件。
 // FOPEN函数调用fopen库函数打开文件，如果文件名中包含的目录不存在，就创建目录。
 // FOPEN函数的参数和返回值与fopen函数完全相同。
@@ -1636,6 +1611,31 @@ bool CDir::isEmptyDir(const char *in_DirName)
 
     closedir(dir);
     return false;
+}
+
+std::string CDir::GetCurrentDir()
+{
+    std::string path;
+    char szDir[1024 + 1] = { 0 };
+
+    ssize_t cnt = readlink("/proc/self/exe", szDir, sizeof(szDir));
+    if(cnt < 0 || cnt >= 1025)
+    {
+        return path;
+    }
+    
+    for(ssize_t i = cnt; i >= 0; --i)
+    {
+        if(szDir[i] == '/')
+        {
+            szDir[i+1] = '\0';
+            break;
+        }
+    }
+
+    path = szDir;
+
+    return path;
 }
 
 // 删除目录中的文件，类似Linux系统的rm命令。

@@ -235,9 +235,6 @@ public:
 // 返回值：true-成功，false-失败，如果返回失败，原因有大概有三种情况：1）权限不足；2）pathorfilename参数不是合法的文件名或目录名；3）磁盘空间不足。
 bool MKDIR(const char *pathorfilename, bool bisfilename = false);
 
-// 得到当前进程的路径
-std::string GetCurrentDir();
-
 
 // 获取某目录及其子目录中的文件列表信息。
 class CDir
@@ -305,6 +302,9 @@ public:
 
     // 是否是空目录, 注意不判断是否是目录或者目录是否存在, 若是空目录返回true, 否则返回false(非空目录, 目录不存在, 非目录文件, 没有访问权限)
     static bool isEmptyDir(const char *in_DirName);
+
+    // 得到当前进程的路径
+    static std::string GetCurrentDir();
 };
 
 // 文件操作相关的函数和类
