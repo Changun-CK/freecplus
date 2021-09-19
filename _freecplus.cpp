@@ -1,6 +1,5 @@
 #include "_freecplus.h"  
 
-
 using convert_t = std::codecvt_utf8<wchar_t>;
 static std::wstring_convert<convert_t, wchar_t> strconverter;
 
@@ -2443,4 +2442,32 @@ bool runCmd(const std::string& cmd)
 
     pclose(fd);
     return true;
+}
+
+unsigned long long maxCommonFactor(unsigned long long a, unsigned long long b)
+{
+    unsigned long long tmp;
+    while( b > 0 )
+    {
+        tmp = a % b;
+        a = b;
+        b = tmp;
+    }
+
+    return a;
+}
+
+unsigned long long minCommonMultiple(unsigned long long a, unsigned long long b)
+{
+    unsigned long long ret = 0;
+    if (a > 0 && b > 0)
+    {
+        ret = maxCommonFactor(a, b);
+        if (ret > 0)
+        {
+            ret = a * (b / ret); // 注意先算除法避免溢出风险
+        }
+    }
+
+    return ret;
 }

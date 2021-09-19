@@ -658,4 +658,9 @@ bool hostname_to_IP(const char *urlbuf, std::vector<std::string>& v_ip);
 bool runCmd(const std::string& cmd, std::string& context);
 bool runCmd(const std::string& cmd);
 
+/* 求最大公约数, 为避免溢出风险, 使用unsigned long long作为出入参 */
+unsigned long long maxCommonFactor(unsigned long long a, unsigned long long b);
+/* 求最小公倍数, 为避免溢出风险, 使用unsigned long long作为出入参 */
+unsigned long long minCommonMultiple(unsigned long long a, unsigned long long b);
+
 #endif // FREECPLUS_H
